@@ -17,6 +17,7 @@
       <module name="myerp-business" target="1.8" />
       <module name="myerp-consumer" target="1.8" />
       <module name="myerp-model" target="1.8" />
+      <module name="myerp-report" target="1.5" />
       <module name="myerp-technical" target="1.8" />
     </bytecodeTargetLevel>
   </component>

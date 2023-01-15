@@ -1,44 +1,112 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class EcritureComptableTest {
+
+    EcritureComptable ecritureComptableUnderTest;
+
+    @BeforeEach
+    public void init() {
+        ecritureComptableUnderTest = new EcritureComptable();
+        ecritureComptableUnderTest.setLibelle("Equilibrée");
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(2, null, "301"));
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
+    }
 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
         BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
         String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
                                      .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
-        LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
+        return new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
                                                                     vLibelle,
                                                                     vDebit, vCredit);
-        return vRetour;
     }
 
     @Test
-    public void isEquilibree() {
-        EcritureComptable vEcriture;
-        vEcriture = new EcritureComptable();
+    public void givenListLigneEcriture_whenGetTotalDebit_thenReturnSumOfDebit (){
+        // GIVEN already initialized
 
-        vEcriture.setLibelle("Equilibrée");
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
-        Assert.assertTrue(vEcriture.toString(), vEcriture.isEquilibree());
+        // WHEN
+        BigDecimal resultTest = ecritureComptableUnderTest.getTotalDebit();
 
-        vEcriture.getListLigneEcriture().clear();
-        vEcriture.setLibelle("Non équilibrée");
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "10", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "30"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "1", "2"));
-        Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
+        // THEN
+        assertThat(resultTest.toString()).isEqualTo("341.00");
     }
+
+    @Test
+    public void givenListLigneEcriture_whenGetTotalCredit_thenReturnSumOfCredit (){
+        // GIVEN already initialized
+
+        // WHEN
+        BigDecimal resultTest = ecritureComptableUnderTest.getTotalCredit();
+
+        // THEN
+        assertThat(resultTest.toString()).isEqualTo("341");
+    }
+
+    @Test
+    public void ShouldReturnTrue_WhenTotalCreditIsEqualToTotalDebit() {
+        // GIVEN already initialized
+
+        // WHEN
+        boolean resultTest = ecritureComptableUnderTest.isEquilibree();
+
+        // THEN
+        assertThat(resultTest).isEqualTo(true);
+    }
+
+    @Test
+    public void ShouldReturnFalse_WhenTotalCreditIsNotEqualToTotalDebit() {
+        // GIVEN
+        ecritureComptableUnderTest.setLibelle("Non équilibrée");
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(1, "200", null));
+
+
+        // WHEN
+        boolean resultTest = ecritureComptableUnderTest.isEquilibree();
+
+        // THEN
+        assertThat(resultTest).isEqualTo(false);
+    }
+
+    @Test
+    void shouldReturnStringValueOfEcritureComptable_whenToString (){
+        // GIVEN
+        ecritureComptableUnderTest.getListLigneEcriture().clear();
+        ecritureComptableUnderTest.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
+
+        // WHEN
+        String result = ecritureComptableUnderTest.toString();
+
+        // THEN
+        assertThat(result)
+                .isEqualTo("EcritureComptable{id=null, " +
+                        "journal=null, " +
+                        "reference='null', " +
+                        "date=null, " +
+                        "libelle='Equilibrée', " +
+                        "totalDebit=200.50, " +
+                        "totalCredit=0, " +
+                        "listLigneEcriture=[\n" +
+                            "LigneEcritureComptable{compteComptable=CompteComptable{numero=1, libelle='null'}, " +
+                            "libelle='200.50', " +
+                            "debit=200.50, " +
+                            "credit=null}" +
+                        "\n]" +
+                        "}");
+    }
+
 
 }
