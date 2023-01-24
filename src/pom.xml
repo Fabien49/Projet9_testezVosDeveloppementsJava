@@ -49,6 +49,7 @@
 
         <!-- ===== Application properties ===== -->
         <application.name>MyERP</application.name>
+        <relative.path.to.parent>../pom.xml</relative.path.to.parent>
 
         <!-- ===== Version properties ===== -->
         <log4j.version>2.17.1</log4j.version>
@@ -56,14 +57,15 @@
 
         <!-- ===== Sonar Cloud properties ===== -->
         <sonar.projectKey>Fabien49_Projet9_testezVosDeveloppementsJava</sonar.projectKey>
-        <sonar.organization>Fabien49</sonar.organization>
+        <sonar.organization>fabien49</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>d8835cba94cdb9f3049144cdf375a880ea0f87bd</sonar.login>
+        <sonar.login>c5d9da440cf9e23909ccdaf5ff593dbfac0ca1da</sonar.login>
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.language>java</sonar.language>
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
         <!--<sonar.branch.name>develop</sonar.branch.name>-->
-        <aggregate.report.dir>myerp-report/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+        <aggregate.report.dir>${project.artifactId}/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 
 
     </properties>
@@ -165,6 +167,13 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>1.6.2</version>
+                <scope>test</scope>
+            </dependency>
+
             <!-- Commons Logging Bridge -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -183,14 +192,49 @@
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
-                <version>1.1.0.Final</version>
+                <version>2.0.1.Final</version>
             </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>2.2.6</version>
+            </dependency>
+
+
             <!-- implementation -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.0.23.Final</version>
             </dependency>
+
+            <!-- JAXBException in java 11 files missing -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.2.11</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>2.2.11</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.11</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
 
             <!-- ===== Apache Commons ===== -->
             <dependency>
@@ -259,31 +303,45 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>4.12</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>5.6.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.6.0</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>3.3.3</version>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>3.1.0</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.16.1</version>
+                <version>3.15.0</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.core</artifactId>
+                <version>0.8.3</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -362,16 +420,16 @@
 
                 <!-- ===== Test / Reporting ===== -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20</version>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.7.0.1746</version>
                 </plugin>
 
                 <!-- ===== Test / Reporting (Unit Test) ===== -->
-<!--                <plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
+                    <version>2.22.2</version>
                     <configuration>
                         <skipTests>false</skipTests>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -390,7 +448,7 @@
                             <version>5.6.0</version>
                         </dependency>
                     </dependencies>
-                </plugin>-->
+                </plugin>
 
                 <!-- ===== Test / Reporting (Integration Test) ===== -->
 
@@ -538,10 +596,15 @@
             <!-- ===== Création du rapport des tests unitaires (JUnit) ===== -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.20</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
-                    <linkXRef>false</linkXRef>
+                    <includes>
+                        <include>**/*Spec.*</include>
+                        <include>**/*Test.*</include>
+                        <include>**/*_UT.java</include>
+                    </includes>
+                    <!--<linkXRef>false</linkXRef>-->
                 </configuration>
                 <reportSets>
                     <!-- reportSet par défaut, exécuté dans tous les modules (non-aggregate reports) -->
@@ -549,7 +612,7 @@
                         <reports>
                             <!-- goal "report-only" afin de ne pas relancer les tests unitaires
                                  car normalement ils ont été lancés par la phase compile -->
-                            <report>report-only</report>
+                            <!--<report>report-only</report>-->
                         </reports>
                     </reportSet>
                     <reportSet>
@@ -629,7 +692,7 @@
                         <inherited>false</inherited>
                         <configuration>
                             <!-- Skip checktyle execution will only scan the outputFile. -->
-                            <skipExec>true</skipExec>
+                            <!--<skipExec>true</skipExec>-->
                         </configuration>
                         <reports>
                             <report>checkstyle-aggregate</report>

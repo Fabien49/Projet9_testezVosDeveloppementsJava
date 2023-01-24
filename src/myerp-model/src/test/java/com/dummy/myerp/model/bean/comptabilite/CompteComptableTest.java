@@ -25,7 +25,7 @@ class CompteComptableTest {
     }
 
     @Test
-    void shouldReturnCompteComptableIfPresent_whenGetByNumero() {
+    public void shouldReturnCompteComptableIfPresent_whenGetByNumero() {
         // GIVEN already initialized
         int compteComptableNumberSearched = 1;
 
@@ -37,7 +37,7 @@ class CompteComptableTest {
     }
 
     @Test
-    void shouldNotReturnCompteComptableIfNotPresent_whenGetByNumero() {
+    public void shouldNotReturnCompteComptableIfNotPresent_whenGetByNumero() {
         // GIVEN already initialized
         int compteComptableNumberSearched = 10;
 
@@ -49,7 +49,7 @@ class CompteComptableTest {
     }
 
     @Test
-    void shouldReturnStringValueOfCompteComptable_whenToString (){
+    public void shouldReturnStringValueOfCompteComptable_whenToString (){
         // GIVEN already initialize
 
         // WHEN
