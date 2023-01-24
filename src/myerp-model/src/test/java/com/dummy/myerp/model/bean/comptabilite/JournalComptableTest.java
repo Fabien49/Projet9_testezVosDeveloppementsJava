@@ -25,7 +25,7 @@ class JournalComptableTest {
     }
 
     @Test
-    void shouldReturnJournalComptableIfPresent_whenGetByCode() {
+    public void shouldReturnJournalComptableIfPresent_whenGetByCode() {
         // GIVEN already initialized
         String journalComptableNumberSearched = "A1";
 
@@ -37,7 +37,7 @@ class JournalComptableTest {
     }
 
     @Test
-    void shouldNotReturnJournalComptableIfNotPresent_whenGetBycode() {
+    public void shouldNotReturnJournalComptableIfNotPresent_whenGetBycode() {
         // GIVEN already initialized
         String journalComptableNumberSearched = "A15";
 
@@ -49,7 +49,7 @@ class JournalComptableTest {
     }
 
     @Test
-    void shouldReturnStringValueOfJournalComptable_whenToString (){
+    public void shouldReturnStringValueOfJournalComptable_whenToString (){
         // GIVEN already initialize
 
         // WHEN

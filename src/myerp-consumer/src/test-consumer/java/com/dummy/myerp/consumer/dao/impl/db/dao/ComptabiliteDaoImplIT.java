@@ -42,7 +42,7 @@ public class ComptabiliteDaoImplIT {
         ecritureComptable.setJournal(new JournalComptable("BQ", "Banque"));
         ecritureComptable.setDate(new Date());
         ecritureComptable.setLibelle("Libelle");
-        ecritureComptable.setReference("BQ-2020/00001");
+        ecritureComptable.setReference("BQ-2023/00001");
         ecritureComptable.getListLigneEcriture().add(this.createLigne(401, "200.50", null));
         ecritureComptable.getListLigneEcriture().add(this.createLigne(401, "100.50", "33"));
         ecritureComptable.getListLigneEcriture().add(this.createLigne(411, null, "301"));
@@ -94,7 +94,7 @@ public class ComptabiliteDaoImplIT {
     @Test
     void insertEcritureComptable_getEcritureComptableByRef() throws NotFoundException {
         comptabiliteDaoUnderTest.insertEcritureComptable(ecritureComptable);
-        EcritureComptable ecritureComptableFromDB = comptabiliteDaoUnderTest.getEcritureComptableByRef("BQ-2020/00001");
+        EcritureComptable ecritureComptableFromDB = comptabiliteDaoUnderTest.getEcritureComptableByRef("BQ-2023/00001");
         assertThat(ecritureComptableFromDB.getLibelle()).isEqualTo("Libelle");
     }
 
@@ -109,13 +109,13 @@ public class ComptabiliteDaoImplIT {
 
     @Test
     void insertSequenceEcritureComptable_getSequenceEcritureComptable_updateSequenceEcritureComptable() throws NotFoundException {
-        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(2020,1);
+        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(2023,1);
         comptabiliteDaoUnderTest.insertSequenceEcritureComptable(sequenceEcritureComptable,"BQ");
-        SequenceEcritureComptable sequenceEcritureComptableFromDB = comptabiliteDaoUnderTest.getSequenceEcritureComptable("BQ",2020);
+        SequenceEcritureComptable sequenceEcritureComptableFromDB = comptabiliteDaoUnderTest.getSequenceEcritureComptable("BQ",2023);
         assertThat(sequenceEcritureComptableFromDB.getDerniereValeur()).isEqualTo(1);
         sequenceEcritureComptableFromDB.setDerniereValeur(2);
         comptabiliteDaoUnderTest.updateSequenceEcritureComptable(sequenceEcritureComptableFromDB,"BQ");
-        SequenceEcritureComptable sequenceEcritureComptableFromDB2 = comptabiliteDaoUnderTest.getSequenceEcritureComptable("BQ",2020);
+        SequenceEcritureComptable sequenceEcritureComptableFromDB2 = comptabiliteDaoUnderTest.getSequenceEcritureComptable("BQ",2023);
         assertThat(sequenceEcritureComptableFromDB2.getDerniereValeur()).isEqualTo(2);
     }
 

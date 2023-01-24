@@ -7,7 +7,7 @@
 
     <!-- ====================   Consumer   ==================== -->
     <!-- AbstractDbConsumer -->
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetClass" value="com.dummy.myerp.consumer.db.AbstractDbConsumer"/>
         <property name="targetMethod" value="configure"/>
         <property name="arguments">
@@ -19,7 +19,7 @@
                 </entry>
             </map>
         </property>
-    </bean>
+    </bean>-->
 
 
     <!-- ==================== Consumer-Proxy ==================== -->
@@ -43,7 +43,7 @@
 
 
     <!-- ==================== Databases ==================== -->
-    <!-- <bean id="dataSourceMYERP" class="com.dummy.myerp.technical.util.spring.NullFactoryBean">
+<!--     <bean id="dataSourceMYERP" class="com.dummy.myerp.technical.util.spring.NullFactoryBean">
          <constructor-arg value="javax.sql.DataSource"/>
      </bean>-->
 
