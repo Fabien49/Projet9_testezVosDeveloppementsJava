@@ -3,7 +3,6 @@ package com.dummy.myerp.consumer.dao.impl.db.dao;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import com.dummy.myerp.technical.exception.NotFoundException;
 import org.apache.commons.lang3.ObjectUtils;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,10 +48,7 @@ public class ComptabiliteDaoImplIT {
         ecritureComptable.getListLigneEcriture().add(this.createLigne(411, "40", "7"));
     }
 
-//    @After
-//    public void undef(){
-//        ecritureComptable = null;
-//    }
+
 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
