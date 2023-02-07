@@ -58,7 +58,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.3.12</version>
+        </dependency>
+        <!-- ===== Spring JDBC/Tx ===== -->
+        <!-- spring-tx : transaction, JCA, DAO -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
 
 
@@ -119,6 +124,18 @@
             <artifactId>junit</artifactId>
         </dependency>
 
+        <!-- ===== JSR 303 - Bean validation ===== -->
+        <!-- implementation -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 
@@ -157,7 +174,7 @@
                         <directory>src/test/resources</directory>
                     </testResource>
                     <testResource>
-                        <directory>src/test-consumer/resources</directory>
+                        <directory>src/test/resources</directory>
                     </testResource>
                 </testResources>
             </build>
@@ -326,6 +343,5 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 </project>

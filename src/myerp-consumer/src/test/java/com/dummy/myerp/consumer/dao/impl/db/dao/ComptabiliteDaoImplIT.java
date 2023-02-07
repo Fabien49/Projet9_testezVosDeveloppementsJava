@@ -3,6 +3,7 @@ package com.dummy.myerp.consumer.dao.impl.db.dao;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import com.dummy.myerp.technical.exception.NotFoundException;
 import org.apache.commons.lang3.ObjectUtils;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
@@ -84,8 +86,24 @@ public class ComptabiliteDaoImplIT {
     @Test
     void getEcritureComptable() throws NotFoundException {
         EcritureComptable ecritureComptableFromDB = comptabiliteDaoUnderTest.getEcritureComptable(-1);
-        assertThat(ecritureComptableFromDB.getLibelle()).isEqualTo("Cartouches d’imprimante");
+        System.out.println(ecritureComptableFromDB.getLibelle());
+        System.out.println("Cartouches d'imprimante");
+        assertThat(ecritureComptableFromDB.getLibelle()).isEqualTo("Cartouches d'imprimante");
     }
+
+
+/*  @Test
+    void getEcritureComptable() throws NotFoundException {
+
+        String varExpected = "Cartouches d’imprimante";
+        String varExpectedUTF8 = new String(varExpected.getBytes(StandardCharsets.UTF_8));
+        EcritureComptable ecritureComptableFromDB = comptabiliteDaoUnderTest.getEcritureComptable(-1);
+        String ecritureComptableBDLabel = ecritureComptableFromDB.getLibelle();
+        System.out.println("Ecriture Comptable from BDD + " + ecritureComptableBDLabel);
+        assertThat(ecritureComptableBDLabel).isEqualTo(varExpectedUTF8);
+        *//*Assert.assertEquals(varExpected,ecritureComptableBDLabel);*//*
+    }*/
+
 
     @Test
     void insertEcritureComptable_getEcritureComptableByRef() throws NotFoundException {

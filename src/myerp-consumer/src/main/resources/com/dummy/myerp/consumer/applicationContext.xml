@@ -7,10 +7,11 @@
 
     <!-- ====================   Consumer   ==================== -->
     <!-- AbstractDbConsumer -->
-<!--    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetClass" value="com.dummy.myerp.consumer.db.AbstractDbConsumer"/>
         <property name="targetMethod" value="configure"/>
         <property name="arguments">
+
             <map>
                 <entry value-ref="dataSourceMYERP">
                     <key>
@@ -19,7 +20,7 @@
                 </entry>
             </map>
         </property>
-    </bean>-->
+    </bean>
 
 
     <!-- ==================== Consumer-Proxy ==================== -->
@@ -43,18 +44,23 @@
 
 
     <!-- ==================== Databases ==================== -->
-<!--     <bean id="dataSourceMYERP" class="com.dummy.myerp.technical.util.spring.NullFactoryBean">
-         <constructor-arg value="javax.sql.DataSource"/>
-     </bean>-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:com/dummy/myerp/consumer/database.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
 
-     <bean id="dataSourceMYERP" class="org.apache.commons.dbcp.BasicDataSource"
-                 destroy-method="close">
-         <property name="driverClassName" value="org.postgresql.Driver" />
-         <property name="url"
-                         value="jdbc:postgresql://localhost:5432/myerp" />
-         <property name="username" value="postgres" />
-         <property name="password" value="admin" />
-     </bean>
+    <bean id="dataSourceMYERP"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <constructor-arg value="javax.sql.DataSource"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
 
 
      <!-- ========== SQL ========== -->
