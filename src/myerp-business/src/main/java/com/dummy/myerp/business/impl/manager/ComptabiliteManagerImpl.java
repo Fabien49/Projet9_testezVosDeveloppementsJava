@@ -92,7 +92,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
             }
             if (sequenceEcritureComptable != null) {
                 newSequence = sequenceEcritureComptable.getDerniereValeur() + 1;
-                pEcritureComptable.setReference(journalCode + "-" + currentYear + "/" + referenceFormat.format(newSequenceEcritureComptable));
+                pEcritureComptable.setReference(journalCode + "-" + currentYear + "/" + referenceFormat.format(newSequence));
                 sequenceEcritureComptable.setDerniereValeur(newSequence);
                 getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(sequenceEcritureComptable, journalCode);
             }

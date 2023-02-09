@@ -24,9 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "/com/dummy/myerp/consumer/bootstrapContext.xml")
-@Sql(scripts = {"classpath:/com/dummy/myerp/consumer/01_create_schema.sql",
-                "classpath:/com/dummy/myerp/consumer/02_create_tables.sql",
-                "classpath:/com/dummy/myerp/consumer/21_insert_data_demo.sql" })
+/*@Sql(scripts = {"/01_create_schema.sql", "/02_create_tables.sql", "/21_insert_data_demo.sql" })*/
 public class ComptabiliteDaoImplIT {
 
     static ComptabiliteDaoImpl comptabiliteDaoUnderTest;

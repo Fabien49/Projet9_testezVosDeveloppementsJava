@@ -361,7 +361,7 @@ public class ComptabiliteManagerImplTest {
         then(mockDaoProxy).should(atLeast(2)).getComptabiliteDao();
     }
 
-/*   @Test
+    @Test
     @Tag("ContextReference")
     public void givenXThEcritureComptableOfYear_whenAddReference_thenAddNumberXPlusOneInReferenceAndSaveNewNumberInSequenceEcritureComptable() throws NotFoundException {
         // GIVEN
@@ -378,5 +378,5 @@ public class ComptabiliteManagerImplTest {
         // THEN
         assertThat(sequenceNumber).isEqualTo("00016");
         then(mockDaoProxy).should(atLeast(2)).getComptabiliteDao();
-    }*/
+    }
 }
