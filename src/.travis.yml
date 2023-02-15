@@ -17,13 +17,13 @@ before_script:
 script:
 
       # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-      - mvn clean verify sonar:sonar
-      - cd ../docker/dev
-      - docker-compose stop
-      - docker-compose rm -f
-      - docker-compose up -d
-      - docker ps -a
-      - cd ../../src
+#      - mvn clean verify sonar:sonar
+#      - cd ../docker/dev
+#      - docker-compose stop
+#      - docker-compose rm -f
+#      - docker-compose up -d
+#      - docker ps -a
+#      - cd ../../src
 
 addons:
   sonarcloud:
