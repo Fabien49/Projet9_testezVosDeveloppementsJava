@@ -51,7 +51,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Run Postgres
+    - name: Run Docker
       run: docker-compose up
       working-directory: ./docker/dev
     - name: Build with Maven
