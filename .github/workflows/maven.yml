@@ -18,6 +18,29 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./src
+        
+    services:
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: admin
+          POSTGRES_USER: postgres
+          POSTGRES_DB: db_myerp
+          DATABASE_URL: postgresql://127.0.0.1:9032/db_myerp
+          
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432 
+       
 
     steps:
     - name: Standard Checkout
@@ -28,6 +51,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Run Postgres
+      run: docker-compose up -d
+      working-directory: ./docker/dev
     - name: Build with Maven
       run: mvn clean verify sonar:sonar
 
