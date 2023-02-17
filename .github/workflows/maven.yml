@@ -50,6 +50,7 @@ jobs:
         cache: maven
     - name: Run Postgres
       run: docker-compose up -d
+      working-directory: ./docker
     - name: Build with Maven
       run: mvn clean verify sonar:sonar
 
