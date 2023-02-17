@@ -52,7 +52,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run Docker
-      run: docker-compose up
+      run: docker-compose up -d
       working-directory: ./docker/dev
     - name: Build with Maven
       run: mvn clean verify sonar:sonar
