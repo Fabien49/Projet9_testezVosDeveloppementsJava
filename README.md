@@ -38,3 +38,15 @@ Il comporte :
     docker-compose stop
     docker-compose rm -v
     docker-compose up
+
+## Environnement des tests
+
+### Lancement des tests
+
+    cd src
+    mvn verify sonar:sonar
+
+### Sonar Jacoco Coverage
+
+![Couverture des Tests](https://github.com/Fabien49/Projet9_testezVosdeveloppementsJava/blob/master/doc/Capture_coverage.PNG?raw=true "Employee Data title")
+

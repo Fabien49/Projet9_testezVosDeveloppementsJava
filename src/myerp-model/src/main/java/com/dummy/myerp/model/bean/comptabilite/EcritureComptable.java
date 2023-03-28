@@ -111,7 +111,7 @@ public class EcritureComptable {
      * @return boolean
      */
     public boolean isEquilibree() {
-       // TODO RG_Compta_2: erreur2 compareTo (pour les BigDecimal) au lieu de isEqualsTo
+       // TODO RG_Compta_2: erreur2 compareTo (pour les BigDecimal) au lieu de .equals
         return this.getTotalDebit().compareTo(getTotalCredit()) == 0;
     }
 
