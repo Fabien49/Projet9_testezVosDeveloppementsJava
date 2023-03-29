@@ -15,7 +15,7 @@ class JournalComptableTest {
 
     @BeforeEach
     public void init() {
-        // create 5 journeaux comptables for tests
+        // create 5 journaux comptables for tests
         for (int i = 0; i < 5; i++){
             journalComptableUnderTest = new JournalComptable();
             journalComptableUnderTest.setLibelle("QQ");

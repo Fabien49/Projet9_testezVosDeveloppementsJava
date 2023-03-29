@@ -89,20 +89,6 @@ public class ComptabiliteDaoImplIT {
         assertThat(ecritureComptableFromDB.getLibelle()).isEqualTo("Cartouches d'imprimante");
     }
 
-
-/*  @Test
-    void getEcritureComptable() throws NotFoundException {
-
-        String varExpected = "Cartouches d’imprimante";
-        String varExpectedUTF8 = new String(varExpected.getBytes(StandardCharsets.UTF_8));
-        EcritureComptable ecritureComptableFromDB = comptabiliteDaoUnderTest.getEcritureComptable(-1);
-        String ecritureComptableBDLabel = ecritureComptableFromDB.getLibelle();
-        System.out.println("Ecriture Comptable from BDD + " + ecritureComptableBDLabel);
-        assertThat(ecritureComptableBDLabel).isEqualTo(varExpectedUTF8);
-        *//*Assert.assertEquals(varExpected,ecritureComptableBDLabel);*//*
-    }*/
-
-
     @Test
     void insertEcritureComptable_getEcritureComptableByRef() throws NotFoundException {
         comptabiliteDaoUnderTest.insertEcritureComptable(ecritureComptable);
@@ -130,6 +116,4 @@ public class ComptabiliteDaoImplIT {
         SequenceEcritureComptable sequenceEcritureComptableFromDB2 = comptabiliteDaoUnderTest.getSequenceEcritureComptable("BQ",2023);
         assertThat(sequenceEcritureComptableFromDB2.getDerniereValeur()).isEqualTo(2);
     }
-
-
 }
