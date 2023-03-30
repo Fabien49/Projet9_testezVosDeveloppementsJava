@@ -105,8 +105,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     }
 
 
-
-
     /**
      * {@inheritDoc}
      */
