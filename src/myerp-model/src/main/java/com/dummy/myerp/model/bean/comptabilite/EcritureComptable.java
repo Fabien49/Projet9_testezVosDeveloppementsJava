@@ -133,4 +133,6 @@ public class EcritureComptable {
             .append("}");
         return vStB.toString();
     }
+
+    //Test Soutenance
 }
